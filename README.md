@@ -1,6 +1,3 @@
-# HackBerry-Pi
-A Cybersecurity Project for Penetration Testing of Windows PCs and Wi-Fi Infrastructure Based on the Raspberry Pi Zero 2 W!
-
 # HackBerry-Pi: A Raspberry Pi Zero 2 W Cybersecurity Toolkit
 
 Inspired by the legendary WiFi Pineapple and the versatile USB Rubber Ducky, HackBerry-Pi empowers you to delve into the world of penetration testing for Windows PCs and Wi-Fi infrastructure. Built on the compact and powerful Raspberry Pi Zero 2 W, this project provides a portable and user-friendly platform to enhance your security expertise.
