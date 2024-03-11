@@ -5,7 +5,7 @@ Inspired by the legendary WiFi Pineapple and the versatile USB Rubber Ducky, Hac
 ## Requirements:
 
 - Raspberry Pi Zero 2 W
-- External USB Wi-Fi antenna (compatible with Raspberry Pi Zero 2 W and supporting monitor mode)
+- External USB Wi-Fi antenna (compatible with Raspberry Pi Zero 2 W and supporting monitor mode im using a brostrend)
 - Micro-B male to 2x USB-A female splitter cable
 - SD card (minimum 8GB)
 - Standard USB-A male to USB-A male cable
