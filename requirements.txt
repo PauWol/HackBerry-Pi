@@ -1,2 +1,3 @@
-wifi
-wifiap
+configparser
+flask
+flask_login
