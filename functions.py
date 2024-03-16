@@ -119,5 +119,5 @@ class Settings(object):
             print('Error: {}'.format(e))
 #Wifi ------------------------------------------------
 def  get_wifis():   
-    r = subprocess.check_output('sudo wifi -s wlan1',text=True, shell=True)
+    r = subprocess.check_output('sudo wifi -s wlan1', shell=True)
     return r
