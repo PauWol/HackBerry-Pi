@@ -61,21 +61,19 @@ a {
 	color: inherit;
 }
 
-.responsive-wrapper {
-	width: 90%;
-	max-width: 1600px;
-	margin-left: auto;
-	margin-right: auto;
-}
 
 .app {
-	min-height: 80vh;
-	width: 95%;
-	max-width: 1600px;
+	min-height: 80vh;  /* No change needed for viewport height */
+	width: 95%;       /* Full width of the parent element */
+	     /* Inherit max-width from parent (optional) */
 	background-color: var(--c-gray-800);
-	padding: 2vw 4vw 6vw;
+	
+	/* Convert padding values to percentages */
+	padding: 2% 4% 8%;
+	
 	display: flex;
 	flex-direction: column;
+	
 }
 
 .app-header {
@@ -87,16 +85,10 @@ a {
     justify-content: space-between;
 }
 
-.app-header-navigation {
-	@media (max-width: 1200px) {
-		display: none;
-	}
-}
-
 .app-header-actions {
 	display: flex;
 	align-items: center;
-	@media (max-width: 1200px) {
+	@media (max-width: 0px) {
 		display: none;
 	}
 }
@@ -180,7 +172,27 @@ a {
 		border-bottom: 0;
 	}
 }
+@media screen and (max-width: 1200px) {
+	.logo{
+		display: none;
+	}
+	.mobile_vanish{
+		display: none;
+	}
+  }
 
+  @media screen and (max-width: 450px) {
+	.tabs{
+		width: 40%;
+		scale: 0.8;
+	}
+	.app-header-navigation{
+		width: 100%;
+	}
+	.fold{
+		width: 100%;
+	}
+  }
 .logo-icon {
 	display: flex;
 	align-items: center;
