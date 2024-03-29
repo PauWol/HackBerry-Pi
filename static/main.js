@@ -304,30 +304,55 @@ function wifi_template(i) {
 	const dropdownButton = document.createElement("button");
 	dropdownButton.classList.add("dropbtn");
 	dropdownButton.textContent = `${i['ESSID']} >> ${i['Address']}`;
-	dropdownButton.onclick = dropdownToggel; // Assuming you have a function named dropdownToggel()
+	dropdownButton.onclick = ()=>{dropdownToggel(i['Address']) }; // Assuming you have a function named dropdownToggel()
 	
 	// Create the dropdown content (div)
 	const dropdownContent = document.createElement("div");
 	dropdownContent.classList.add("dropdown-content");
-	dropdownContent.id = "myDropdown";
+	dropdownContent.id = i['Address'];
 	
 	// Create anchor elements for the links
-	const homeLink = document.createElement("a");
-	homeLink.href = "#home";
-	homeLink.textContent = "Home";
+	const deauth = document.createElement("a");
+	deauth.href = "#deauth";
+	deauth.textContent = "Deauth";
+	deauth.onclick = ()=>{
+		handleCommand('sudo wifi -da wlan1'+' '+i['Address']+' 50');
+		save_command('sudo wifi -da wlan1'+' '+i['Address']+' 50');
+	}
 	
-	const aboutLink = document.createElement("a");
-	aboutLink.href = "#about";
-	aboutLink.textContent = "About";
+	const handshake = document.createElement("a");
+	handshake.href = "#handshake";
+	handshake.textContent = "Handshake";
+	handshake.onclick = ()=>{
+		handleCommand('');
+		save_command('')
+	}
 	
-	const contactLink = document.createElement("a");
-	contactLink.href = "#contact";
-	contactLink.textContent = "Contact";
+	const info = document.createElement("a");
+	info.href = "#wifi_info";
+	info.textContent = "Info";
+	info.onclick = ()=>{
+		dropdownToggel(i['Address'])
+		createModal('ww', {
+			title: i['ESSID'],
+			content: `
+			ESSID: ${i['ESSID']}<br>
+			MACADRESS: ${i['Address']}<br>
+			Protocol: ${i['Protocol']}<br>
+			Mode: ${i['Mode']}<br>
+			Frequency: ${i['Frequency']}<br>
+			Channel: ${i['Channel']}<br>
+			Encryption: ${i['Encryption']}<br>
+			Bit Rates: ${['Bit Rates']}<br>
+			Quality: ${i['Quality']}<br>
+			Signal level: ${i['Signal level']}`
+		  });
+	}
 	
 	// Append links to dropdown content
-	dropdownContent.appendChild(homeLink);
-	dropdownContent.appendChild(aboutLink);
-	dropdownContent.appendChild(contactLink);
+	dropdownContent.appendChild(deauth);
+	dropdownContent.appendChild(handshake);
+	dropdownContent.appendChild(info);
 	
 	// Append dropdown button and content to dropdown container
 	dropdownDiv.appendChild(dropdownButton);
@@ -347,7 +372,15 @@ function wifi_list_update(wifi_array) {
 		forLoop.appendChild(wifi_template(element));
 	});
 }
-
+function dropdownToggel(id) {
+	closeAllOpenDropdowns()
+	document.getElementById(id).classList.toggle("show");
+  }
+  
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+	
+  }
 function get_wifis() {
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET", "/wifi");
@@ -362,5 +395,75 @@ function get_wifis() {
 	};
 	xhr.send();	
 }
-//------------------------------------------------------------
+//Modal script------------------------------------------------------------
+function createModal(targetElementId, content) {
+    const targetElement = document.getElementById(targetElementId);
+    
+    // Create modal elements
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.setAttribute('id', 'myModal');
+
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('modal-content');
+
+    const closeBtn = document.createElement('span');
+    closeBtn.classList.add('close');
+    closeBtn.innerHTML = '&times;';
+
+    const title = document.createElement('h2');
+    title.setAttribute('id', 'modalTitle');
+    title.textContent = content.title || 'Modal Title';
+
+    const paragraph = document.createElement('p');
+    paragraph.setAttribute('id', 'modalContent');
+    paragraph.innerHTML = content.content || 'Modal content goes here.';
+
+    // Append elements
+    modalContent.appendChild(closeBtn);
+    modalContent.appendChild(title);
+    modalContent.appendChild(paragraph);
+    modal.appendChild(modalContent);
+    targetElement.appendChild(modal);
+
+    // Close modal when close button is clicked
+    closeBtn.onclick = () => {
+      removeAllChildren(targetElement)
+    }
+
+    // Close modal when clicked outside the modal content
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        removeAllChildren(targetElement)
+      }
+	  if (!event.target.matches('.dropbtn')) {
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+		  var openDropdown = dropdowns[i];
+		  if (openDropdown.classList.contains('show')) {
+			openDropdown.classList.remove('show');
+		  }
+		}
+	  }
+    }
+	modal.style.display = "block";
+	};
+	/*
+	createModal('targetElement', {
+    	title: 'Dynamic Modal Title',
+		content: 'This is a dynamically created modal.'
+  	});
+	*/
+	function closeAllOpenDropdowns() {
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+		  var openDropdown = dropdowns[i];
+		  if (openDropdown.classList.contains('show')) {
+			openDropdown.classList.remove('show');
+		  }
+		}
+	}
+//-------------------------------------------------------------------
 });
