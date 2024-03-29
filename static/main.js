@@ -318,21 +318,23 @@ function wifi_template(i) {
 	deauth.onclick = ()=>{
 		handleCommand('sudo wifi -da wlan1'+' '+i['Address']+' 50');
 		save_command('sudo wifi -da wlan1'+' '+i['Address']+' 50');
+		closeAllOpenDropdowns()
 	}
 	
 	const handshake = document.createElement("a");
 	handshake.href = "#handshake";
 	handshake.textContent = "Handshake";
 	handshake.onclick = ()=>{
-		handleCommand('');
-		save_command('')
+		handleCommand('sudo wifi -h wlan1 ' + i['Address'] + ' ' + i['Channel'] + ' ' + i['ESSID']);
+		save_command('sudo wifi -h wlan1 ' + i['Address'] + ' ' + i['Channel'] + ' ' + i['ESSID'])
+		closeAllOpenDropdowns()
 	}
 	
 	const info = document.createElement("a");
 	info.href = "#wifi_info";
 	info.textContent = "Info";
 	info.onclick = ()=>{
-		dropdownToggel(i['Address'])
+		closeAllOpenDropdowns()
 		createModal('ww', {
 			title: i['ESSID'],
 			content: `
@@ -360,6 +362,19 @@ function wifi_template(i) {
 	
 	// Append dropdown container to list item
 	listItem.appendChild(dropdownDiv);
+
+	window.onclick = (event) => {
+		if (!event.target.matches('.dropbtn')) {
+		  var dropdowns = document.getElementsByClassName("dropdown-content");
+		  var i;
+		  for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+			  openDropdown.classList.remove('show');
+			}
+		  }
+		}
+	};
 	
 	// Return the created list item
 	return listItem;// Create the <li> element
@@ -394,6 +409,16 @@ function get_wifis() {
 	  }
 	};
 	xhr.send();	
+}
+function getCurrentDateTime() {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+    const year = now.getFullYear();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+    return `${day}/${month}/${year},${hours}:${minutes}`;
 }
 //Modal script------------------------------------------------------------
 function createModal(targetElementId, content) {
@@ -431,24 +456,15 @@ function createModal(targetElementId, content) {
       removeAllChildren(targetElement)
     }
 
-    // Close modal when clicked outside the modal content
-    window.onclick = (event) => {
-      if (event.target == modal) {
-        removeAllChildren(targetElement)
-      }
-	  if (!event.target.matches('.dropbtn')) {
-		var dropdowns = document.getElementsByClassName("dropdown-content");
-		var i;
-		for (i = 0; i < dropdowns.length; i++) {
-		  var openDropdown = dropdowns[i];
-		  if (openDropdown.classList.contains('show')) {
-			openDropdown.classList.remove('show');
-		  }
+	window.onclick = (event) => {
+		if (event.target == modal) {
+		removeAllChildren(targetElement)
 		}
-	  }
-    }
+	}
 	modal.style.display = "block";
-	};
+};
+// Close modal when clicked outside the modal content
+
 	/*
 	createModal('targetElement', {
     	title: 'Dynamic Modal Title',
