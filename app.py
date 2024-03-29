@@ -150,7 +150,7 @@ def logout():
 
 @app.route('/wifi', methods=['GET'])
 def wifis():
-    return i#get_wifis()
+    return get_wifis()
 
 #command route
 @app.route('/control', methods=['POST'])
