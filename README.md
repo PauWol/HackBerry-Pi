@@ -30,10 +30,9 @@ By default, the Raspberry Pi will create its own Wi-Fi network `HB_Pi` upon boot
 
 ### 5. Configure Your HackBerry-Pi:
 
-You have the flexibility to configure your HackBerry-Pi using three convenient methods:
+You have the flexibility to configure your HackBerry-Pi using two convenient methods:
 
 - **Secure Shell (SSH):** Establish a secure remote connection from another computer on your network using SSH credentials provided in the project documentation.
-- **Virtual Network Computing (VNC):** Access the Raspberry Pi's graphical desktop remotely through VNC software. The default login details will be available in the project documentation.
 - **Web Interface:** Open a web browser on your connected device and navigate to [http://raspberrypi](http://raspberrypi) to access the web-based configuration interface.
 
 ## Additional Notes:
