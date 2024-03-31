@@ -1,3 +1,0 @@
-configparser
-flask
-flask_login
