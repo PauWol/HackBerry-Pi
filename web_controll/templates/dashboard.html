@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspberry Pi Control</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    <link rel="icon" href="{{ url_for('static',filename='/img/raspberry-pi-icon.png')}}">
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+</head>
+<body>
+    <div class="app">
+		<header class="app-header">
+			<span class="fold" style="display: flex;flex-direction: row;align-items: flex-end;">
+				<div class="app-header-logo">
+					<div class="logo">
+						<span class="logo-icon">
+							<img src=".{{ url_for('static',filename='./img/chip-icon.png') }}" />
+						</span>
+						<h1 class="logo-title">
+							<span>{{ info['sys'][0]['host'] }}</span>
+						</h1>
+					</div>
+				</div>
+				<span class="mobile_vanish" style="padding-left:10%;border-bottom: 1px solid var(--c-gray-600);"></span>
+				<div class="app-header-navigation">
+				<div class="tabs">
+					<span>
+						<a id="overwiew-btn" style="border-bottom: 1px solid var(--c-gray-600);" class="active">
+							Overview
+						</a>
+					</span>
+					<span style="padding-left: 5%;border-bottom: 1px solid var(--c-gray-600);">
+						<a id="wifi-btn">
+							Wifi
+						</a>
+					</span>
+					<span style="padding-left: 5%;border-bottom: 1px solid var(--c-gray-600);">
+						<a id="terminal-btn">
+							Terminal
+						</a>
+					</span>
+					<span style="padding-left: 5%;border-bottom: 1px solid var(--c-gray-600);">
+						<a id="settings-btn">
+							Settings
+						</a>
+					</span>
+					<span style="padding-left: 5%;border-bottom: 1px solid var(--c-gray-600);">
+						<a id="system-btn">
+							System
+						</a>
+					</span>
+				</div>
+				</div>
+			</span>
+		</header>
+		<div id='overwiew' style='height: 100%;'>
+		    {% include 'overwiew.html' %}
+		</div>
+		<div id='terminal' class="bash" style='display:none;height: 100%;'>
+		    {% include 'terminal.html' %}
+		</div>
+		<div id='system' style='display:none;height: 100%;'>
+		    {% include 'system.html' %}
+		</div>
+		<div id="wifi" style="display: none;height: 100%;">
+			{% include 'wifi.html' %}
+		</div>
+    </div>
+</body>
+</html>

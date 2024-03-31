@@ -1,0 +1,19 @@
+<div style="display:flex;width:50%">
+	{% include 'cpu_usage.html' %}
+	{% include 'ram_usage.html' %}
+</div>
+<div style="margin: 0.5%;" class="card_progress">
+	<h1>Disk Usage</h1>
+	{% include 'progress_bar.html' %}
+</div>
+<style>
+.card_progress {
+	  position: relative;
+	  height: 240px;
+	  background-color: var(--container-color);
+	  padding: 1.5rem 2rem;
+	  border-radius: 1.5rem;
+	  align-items: center;
+	  
+	}
+</style>

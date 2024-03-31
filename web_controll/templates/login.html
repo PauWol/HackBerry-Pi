@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    <link rel="icon" href="{{ url_for('static',filename='/img/raspberry-pi-icon.png')}}">
+</head>
+<body>
+    <div style="display: flex;align-items: center;justify-content: center;height: 100%;">
+        <h1>Login</h1>
+        <span style="padding: 1%;"></span>
+        <form action="/" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br style="padding: 1%;">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br style="padding: 1%;">
+            <button style="margin-top: 1.5%;" type="submit">Login</button>
+        </form>
+    </div>
+    
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
