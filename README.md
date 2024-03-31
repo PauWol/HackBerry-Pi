@@ -26,7 +26,7 @@ Insert the flashed SD card into your Raspberry Pi Zero 2 W, connect the necessar
 
 ### 4. Connect to the Raspberry Pi's Wi-Fi:
 
-By default, the Raspberry Pi will create its own Wi-Fi network upon booting. To connect your device to this network, use the pre-configured password: `secrets_file` (remember to change this password for enhanced security after the initial setup).
+By default, the Raspberry Pi will create its own Wi-Fi network `HB_Pi` upon booting. To connect your device to this network, use the pre-configured password: `HB_Pi_1234` (remember to change this password for enhanced security after the initial setup).
 
 ### 5. Configure Your HackBerry-Pi:
 
